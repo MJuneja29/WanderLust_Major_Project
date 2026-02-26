@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != "production") {
+    require('dotenv').config();
+}
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -10,7 +14,6 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user.js");
-require('dotenv').config();
 
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
@@ -45,8 +48,8 @@ const sessionOptions = {
     resave: false,
     saveUninitialized: true,
     cookie: {
-        expires: Date.now() + 7*24*60*60*1000,  // expires after 1 week (in milliseconds)
-        maxAge: 7*24*60*60*1000,
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,  // expires after 1 week (in milliseconds)
+        maxAge: 7 * 24 * 60 * 60 * 1000,
         httpOnly: true,
     }
 };
